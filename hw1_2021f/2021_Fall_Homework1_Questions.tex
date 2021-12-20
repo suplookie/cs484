@@ -1,0 +1,215 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% CS484 Written Question Template
+%
+% This is a LaTeX document. LaTeX is a markup language for producing 
+% documents. Your task is to fill out this document, then to compile 
+% it into a PDF document. 
+%
+% 
+% TO COMPILE:
+% > pdflatex thisfile.tex
+%
+% If you do not have LaTeX and need a LaTeX distribution:
+% - Personal laptops (all common OS): www.latex-project.org/get/
+% - We recommend miktex (https://miktex.org/) for latex engine,
+%   and TeXstudio(http://www.texstudio.org/) for latex editor.
+%   You should install both programs for editing latex.
+%   Or you can use Overleaf (https://www.overleaf.com/) which is 
+%   an online latex editor.
+%
+% If you need help with LaTeX, please come to office hours. 
+% Or, there is plenty of help online:
+% https://en.wikibooks.org/wiki/LaTeX
+%
+% Good luck!
+% Min and the CS484 staff
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue]{hyperref}
+\usepackage[a4paper,margin=1.5in]{geometry}
+\usepackage{stackengine,graphicx}
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+\usepackage{microtype}
+\usepackage{times}
+\usepackage{listings}
+\usepackage{color}
+
+% From https://ctan.org/pkg/matlab-prettifier
+\usepackage[numbered,framed]{matlab-prettifier}
+
+\frenchspacing
+\setlength{\parindent}{0cm} % Default is 15pt.
+\setlength{\parskip}{0.3cm plus1mm minus1mm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Homework 1 Questions}
+\rhead{CS484}
+\rfoot{\thepage}
+
+\date{}
+
+\title{\vspace{-1cm}Homework 1 Questions}
+
+
+\begin{document}
+\maketitle
+\vspace{-2cm}
+\thispagestyle{fancy}
+
+\section*{Instructions}
+\begin{itemize}
+  \item Compile and read through the included Python tutorial.
+  \item 2 questions.
+  \item Include code.
+  \item Feel free to include images or equations.
+  \item Please make this document anonymous.
+  \item \textbf{Please use only the space provided and keep the page breaks.} Please do not make new pages, nor remove pages. The document is a template to help grading.
+  \item If you really need extra space, please use new pages at the end of the document and refer us to it in your answers.
+\end{itemize}
+
+
+\section*{Submission}
+\begin{itemize}
+	\item Please zip your folder with \textbf{hw1\_student id\_name.zip} $($ex: hw1\_20201234\_Peter.zip$)$
+	\item Submit your homework to \href{http://klms.kaist.ac.kr/course/view.php?id=129906}{KLMS}.
+	\item An assignment after its original due date will be degraded from the marked credit per day: e.g., A will be downgraded to B for one-day delayed submission.
+\end{itemize}
+
+\pagebreak
+
+
+\section*{Questions}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Please leave the pagebreak
+\paragraph{Q1:} We wish to set all pixels that have a brightness of 10 or less to 0, to remove sensor noise. However, our code is slow when run on a database with 1000 grayscale images.
+
+\emph{Image:} \href{grizzlypeakg.png}{grizzlypeakg.png}
+
+\definecolor{dkgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+\begin{lstlisting}[language=Python]
+import cv2
+import numpy as np
+A = cv2.imread('grizzlypeakg.png',0)
+m1, n1 = A.shape
+for i in range(m1):
+    for j in range(n1):
+        if A[i,j] <= 10:
+            A[i,j] = 0
+\end{lstlisting}
+
+\paragraph{Q1.1:} How could we speed it up?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{A1.1:} Use logical indexing. 
+\begin{lstlisting}[language=Python]
+import cv2
+import numpy as np
+A = cv2.imread('grizzlypeakg.png',0)
+B = A <= 10
+A[B] = 0
+\end{lstlisting}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Please leave the pagebreak
+\pagebreak
+\paragraph{Q1.2:} What factor speedup would we receive over 1000 images? Please measure it.
+
+Ignore file loading; assume all images are equal resolution; don't assume that the time taken for one image $\times1000$ will equal $1000$ image computations, as single short tasks on multitasking computers often take variable time.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{A1.2:} Factor speedup: 882.9766897090233
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Please leave the pagebreak
+\pagebreak
+\paragraph{Q1.3:} How might a speeded-up version change for color images? Please measure it.
+
+\emph{Image:} \href{grizzlypeak.jpg}{grizzlypeak.jpg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{A1.3:} Factor speedup: 292.8242565864542
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Please leave the pagebreak
+\pagebreak
+\paragraph{Q2:} We wish to reduce the brightness of an image but, when trying to visualize the result, we see a brightness-reduced scene with some weird ``corruption'' of color patches.
+
+\emph{Image:} \href{gigi.jpg}{gigi.jpg}
+
+\begin{lstlisting}[language=Python]
+import cv2
+import numpy as np
+I = cv2.imread('gigi.jpg').astype(np.uint8)
+I = I - 40
+cv2.imwrite('result.png', I)
+\end{lstlisting}
+
+\paragraph{Q2.1:} What is incorrect with this approach? How can it be fixed while maintaining the same amount of brightness reduction?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{A2.1:} Substituting the brightness by 40 for all pixels is incorrect as underflow corrupted the result. It can be fixed by setting pixels with original brightness less than 40 as 0, as code in the below.
+\begin{lstlisting}[language=Python]
+import cv2
+import numpy as np
+I = cv2.imread('gigi.jpg').astype(np.uint8)
+B = I < 40
+I = I - 40
+I[B] = 0
+cv2.imwrite('result.png', I)
+\end{lstlisting}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Please leave the pagebreak
+\pagebreak
+\paragraph{Q2.2:} Where did the original corruption come from? Which specific values in the original image did it represent?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{A2.2:} The original corruption came from pixels with original brightness less than 40, as they cause underflow if substituting by 40. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

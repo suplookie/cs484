@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href='http://fonts.googleapis.com/css?family=Nunito:300|Crimson+Text|Droid+Sans+Mono' rel='stylesheet'
+        type='text/css'>
+  <style type="text/css">
+    body {
+      margin: 0px;
+      width: 100%;
+      background: #fcfcfc;
+    }
+
+    table td {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    h1 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: normal;
+      font-size: 28px;
+      margin: 25px 0px 0px 0px;
+      text-transform: lowercase;
+    }
+
+    .container {
+      margin: 0px auto 0px auto;
+      width: 1160px;
+    }
+
+    .container {
+      margin: 0px auto 0px auto;
+      width: 1160px;
+    }
+
+    .accuracy-bar {
+      height: 16px;
+      border: 1px solid #666666;
+    }
+
+    .accuracy-bar div {
+      height: 16px;
+      background: #f1c40f;
+    }
+
+    .category-row:hover {
+      background: #ddd;
+    }
+
+    .category-row .cell {
+      font-weight: bold;
+    }
+
+    .category-row .training {
+      background: #3498db;
+    }
+
+    .category-row:hover .training {
+      background: #2980b9;
+    }
+
+    .category-row .true-positive {
+      background: #2ecc71;
+    }
+
+    .category-row:hover .true-positive {
+      background: #27ae60;
+    }
+
+    .category-row .false-positive {
+      background: #e67e22;
+    }
+
+    .category-row:hover .false-positive {
+      background: #d35400;
+    }
+
+    .category-row .false-negative {
+      background: #e74c3c;
+    }
+
+    .category-row:hover .false-negative {
+      background: #c0392b;
+    }
+
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+
+  <div style="text-align: center">
+    <h1>Scene classification results visualization</h1>
+    <img src="confusion_matrix.png">
+
+    <br>
+    Accuracy (mean of diagonal of confusion matrix) is %accuracy%
+    <p>
+
+    <table border=0 cellpadding=4 cellspacing=1>
+      <tr>
+        <th>Category name</th>
+        <th>Accuracy</th>
+        <th colspan=2>Sample training images</th>
+        <th colspan=2>Sample true positives</th>
+        <th colspan=2>False positives with true label</th>
+        <th colspan=2>False negatives with wrong predicted label</th>
+      </tr>
+      <!--
+      <tr>
+      <td>Kitchen</td>
+      <td>0.050</td>
+      <td bgcolor=LightBlue><img src="thumbnails/Kitchen_image_0099.jpg" width=112 height=75></td>
+      <td bgcolor=LightBlue><img src="thumbnails/Kitchen_image_0059.jpg" width=56 height=75></td>
+      <td bgcolor=LightGreen><img src="thumbnails/Kitchen_image_0060.jpg" width=54 height=75></td>
+      <td bgcolor=LightGreen><img src="thumbnails/Kitchen_image_0072.jpg" width=107 height=75></td>
+      <td bgcolor=LightCoral><img src="thumbnails/Industrial_image_0062.jpg" width=63 height=75><br><small>Industrial</small></td>
+      <td bgcolor=LightCoral><img src="thumbnails/Industrial_image_0123.jpg" width=120 height=75><br><small>Industrial</small></td>
+      <td bgcolor=#FFBB55><img src="thumbnails/Kitchen_image_0150.jpg" width=100 height=75><br><small>TallBuilding</small></td>
+      <td bgcolor=#FFBB55><img src="thumbnails/Kitchen_image_0052.jpg" width=115 height=75><br><small>Suburb</small></td>
+      </tr>
+      -->
+      %results%
+      <tr>
+        <th>Category name</th>
+        <th>Accuracy</th>
+        <th colspan=2>Sample training images</th>
+        <th colspan=2>Sample true positives</th>
+        <th colspan=2>False positives with true label</th>
+        <th colspan=2>False negatives with wrong predicted label</th>
+      </tr>
+    </table>
+  </div>
+
+
+</div>
+</body>
+</html>
